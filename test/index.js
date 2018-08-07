@@ -1,1 +1,1 @@
-
+require('./models/link')
