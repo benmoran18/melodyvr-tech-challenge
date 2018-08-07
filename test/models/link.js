@@ -37,4 +37,13 @@ describe('LinkModel Class', () => {
       LinkModels[newLinkModel.shortCode] = 1
     }
   })
+
+  it('should store number of visits', () => {
+    const link = new LinkModel().generate('http://www.google.com')
+    expect(link.visits).to.be.equal(0)
+    link.addVisit()
+    expect(link.visits).to.be.equal(1)
+    link.addVisit()
+    expect(link.visits).to.be.equal(2)
+  })
 })

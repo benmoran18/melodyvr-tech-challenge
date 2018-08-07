@@ -1,5 +1,6 @@
 {
   "environment": "dev",
   "port": 9000,
-  "maximumLinkLifeInMilliseconds": null
+  "maximumLinkLifeInMilliseconds": null,
+  "defaultUrl": null
 }
