@@ -4,7 +4,7 @@ const maxNumberOfUniqueLinkModels = 1000
 
 describe('LinkModel Class', () => {
 
-  it('should have not properties if constructor is empty', () => {
+  it('should NOT have properties if constructor is empty', () => {
     let newLink = new LinkModel()
     expect(LinkModel.baseUrl).to.be.equal(undefined)
     expect(LinkModel.createdAt).to.be.equal(undefined)
