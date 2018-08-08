@@ -1,15 +1,58 @@
 const { expect } = require('chai')
 const LinkModel = require('../../lib/models/link.js')
-const maxNumberOfUniqueLinkModels = 1000
 
 describe('LinkModel Class', () => {
 
-  it('should NOT have properties if constructor is empty', () => {
-    let newLink = new LinkModel()
-    expect(LinkModel.baseUrl).to.be.equal(undefined)
-    expect(LinkModel.createdAt).to.be.equal(undefined)
-    expect(LinkModel.shortCode).to.be.equal(undefined)
-    expect(LinkModel.visits).to.be.equal(undefined)
+  it('should throw an error if constructor properties is empty', () => {
+    try {
+      new LinkModel()
+    } catch (error) {
+      return true
+    }
+  })
+  it('should throw an error if constructor properties is missing visits', () => {
+    try {
+      new LinkModel({
+        baseUrl: 'http://www.google.com',
+        createdAt: new Date(),
+        shortCode: 123
+      })
+    } catch (error) {
+      return true
+    }
+  })
+  it('should throw an error if constructor properties is missing baseUrl', () => {
+    try {
+      new LinkModel({
+        createdAt: new Date(),
+        shortCode: 123,
+        visits: 0
+      })
+    } catch (error) {
+      return true
+    }
+  })
+  it('should throw an error if constructor properties is missing createdAt', () => {
+    try {
+      new LinkModel({
+        baseUrl: 'http://www.google.com',
+        shortCode: 123,
+        visits: 100
+      })
+    } catch (error) {
+      return true
+    }
+  })
+  it('should throw an error if constructor properties is missing shortCode', () => {
+    try {
+      new LinkModel({
+        baseUrl: 'http://www.google.com',
+        createdAt: new Date(),
+        visits: 0
+      })
+    } catch (error) {
+      return true
+    }
   })
 
   it('should have properties set from constructor', () => {
@@ -26,20 +69,13 @@ describe('LinkModel Class', () => {
     expect(newLink.visits).to.be.equal(100)
   })
 
-  it(`should generate ${maxNumberOfUniqueLinkModels} unique LinkModels`, () => {
-    const LinkModels = {}
-    for(let i = 0; i < maxNumberOfUniqueLinkModels; i++) {
-      let newLinkModel = new LinkModel().generate('http://www.google.com')
-      if(LinkModels[newLinkModel.shortCode] != null) {
-        return false
-      }
-
-      LinkModels[newLinkModel.shortCode] = 1
-    }
-  })
-
   it('should store number of visits', () => {
-    const link = new LinkModel().generate('http://www.google.com')
+    const link = new LinkModel({
+      baseUrl: 'http://www.google.com',
+      createdAt: new Date(),
+      shortCode: 123,
+      visits: 0
+    })
     expect(link.visits).to.be.equal(0)
     link.addVisit()
     expect(link.visits).to.be.equal(1)
