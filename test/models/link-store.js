@@ -55,7 +55,6 @@ describe('LinkStoreModel Class', () => {
     let linkStoreModel2 = new LinkStoreModel2()
     try {
       await linkStoreModel2.addLink(newLink)
-      let link = await linkStoreModel2.getLink(newLink.shortCode)
       expect(await linkStore.getLink(newLink.shortCode)).to.be.equal(newLink)
     } catch (error) {
       return false
