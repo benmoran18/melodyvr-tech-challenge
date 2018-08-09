@@ -8,6 +8,10 @@
     "test": "nyc mocha",
     "lint": "./node_modules/eslint/bin/eslint.js lib"
   },
+  "pre-push": [
+    "test",
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/benmoran18/melodyvr-tech-challenge.git"
@@ -26,7 +30,8 @@
     "eslint-plugin-import": "^2.13.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
-    "nyc": "^12.0.2"
+    "nyc": "^12.0.2",
+    "pre-push": "^0.1.1"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
